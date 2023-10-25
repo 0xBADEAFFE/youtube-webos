@@ -8,6 +8,13 @@ window.__spatialNavigation__.keyMode = 'NONE';
 
 const ARROW_KEY_CODE = { 37: 'left', 38: 'up', 39: 'right', 40: 'down' };
 
+const KEY_MAPPINGS = {
+  red: [403, 166],
+  green: [404, 172],
+  yellow: [405, 170],
+  blue: [406, 167]
+};
+
 const uiContainer = document.createElement('div');
 uiContainer.classList.add('ytaf-ui-container');
 uiContainer.style['display'] = 'none';
@@ -75,16 +82,27 @@ bindCheckbox('#__sponsorblock_intro', 'enableSponsorBlockIntro');
 bindCheckbox('#__sponsorblock_outro', 'enableSponsorBlockOutro');
 bindCheckbox('#__sponsorblock_interaction', 'enableSponsorBlockInteraction');
 bindCheckbox('#__sponsorblock_selfpromo', 'enableSponsorBlockSelfPromo');
-bindCheckbox(
-  '#__sponsorblock_music_offtopic',
-  'enableSponsorBlockMusicOfftopic'
-);
+bindCheckbox('#__sponsorblock_music_offtopic', 'enableSponsorBlockMusicOfftopic');
+bindCheckbox('#__hide_logo', 'hideLogo');
 
-uiContainer.querySelector('#__hide_logo').checked = configRead('hideLogo');
-uiContainer.querySelector('#__hide_logo').addEventListener('change', (evt) => {
-  configWrite('hideLogo', evt.target.checked);
-});
+function updateCheckbox(selector, config) {
+  uiContainer.querySelector(selector).checked = configRead(config);
+}
 
+function updateUI() {
+  updateCheckbox('#__notifications', 'enableNotifications');
+  updateCheckbox('#__adblock', 'enableAdBlock');
+  updateCheckbox('#__sponsorblock', 'enableSponsorBlock');
+  updateCheckbox('#__sponsorblock_sponsor', 'enableSponsorBlockSponsor');
+  updateCheckbox('#__sponsorblock_intro', 'enableSponsorBlockIntro');
+  updateCheckbox('#__sponsorblock_outro', 'enableSponsorBlockOutro');
+  updateCheckbox('#__sponsorblock_interaction', 'enableSponsorBlockInteraction');
+  updateCheckbox('#__sponsorblock_selfpromo', 'enableSponsorBlockSelfPromo');
+  updateCheckbox('#__sponsorblock_music_offtopic', 'enableSponsorBlockMusicOfftopic');
+  updateCheckbox('#__hide_logo', 'hideLogo');
+}
+
+updateUI();
 const eventHandler = (evt) => {
   console.info(
     'Key event:',
@@ -93,7 +111,7 @@ const eventHandler = (evt) => {
     evt.keyCode,
     evt.defaultPrevented
   );
-  if (evt.charCode == 404 || evt.charCode == 172) {
+  if (KEY_MAPPINGS.green.includes(evt.charCode)) {
     console.info('Taking over!');
     evt.preventDefault();
     evt.stopPropagation();
@@ -107,6 +125,19 @@ const eventHandler = (evt) => {
         uiContainer.style.display = 'none';
         uiContainer.blur();
       }
+    }
+    return false;
+  }
+  if (KEY_MAPPINGS.red.includes(evt.charCode)) {
+    evt.preventDefault();
+    evt.stopPropagation();
+    if (evt.type === 'keydown') {
+      const newValue = !configRead('enableSponsorBlock');
+      configWrite('enableSponsorBlock', newValue);
+      updateUI();
+      showNotification(
+        newValue ? 'SponsorBlock toggled on' : 'SponsorBlock toggled off'
+      );
     }
     return false;
   }
@@ -152,6 +183,7 @@ export function showNotification(text, time = 3000) {
 
 setTimeout(() => {
   showNotification('Press 🟩 to open YTAF configuration screen');
+  showNotification('Press 🟥 to toggle on/off SponsorBlock');
 }, 2000);
 
 window.addEventListener("DOMNodeInserted", (evt) => {

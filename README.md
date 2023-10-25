@@ -11,7 +11,10 @@ YouTube App with extended functionalities
 - [SponsorBlock](https://sponsor.ajay.app/) integration
 - [Autostart](#autostart)
 
-**Note:** Configuration screen can be opened by pressing 🟩 GREEN button on the remote.
+## Remote Buttons
+
+- Press 🟩 GREEN button to open the configuration screen.
+- Press 🟥 RED button to toggle on/off the SponsorBlock.
 
 ## Pre-requisites
 
@@ -24,10 +27,6 @@ YouTube App with extended functionalities
   prebuilt `.ipk` binary file
 - Use official webOS/webOS OSE SDK: `ares-install youtube...ipk` (for webOS SDK configuration
   see below)
-
-## Configuration
-
-Configuration screen can be opened by pressing 🟩 GREEN button on the remote.
 
 ### Autostart
 
