@@ -151,7 +151,7 @@ export function showNotification(text, time = 3000) {
 }
 
 setTimeout(() => {
-  showNotification('Press [GREEN] to open YTAF configuration screen');
+  showNotification('Press 🟩 to open YTAF configuration screen');
 }, 2000);
 
 window.addEventListener("DOMNodeInserted", (evt) => {

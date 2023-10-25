@@ -91,8 +91,16 @@ class SponsorBlockHandler {
     this.buildOverlay();
   }
 
+  updateSkippableCategories() {
+    this.skippableCategories = this.getSkippableCategories();
+  }
+
   getSkippableCategories() {
     const skippableCategories = [];
+    if (!configRead('enableSponsorBlock')) {
+      return skippableCategories;
+    }
+
     if (configRead('enableSponsorBlockSponsor')) {
       skippableCategories.push('sponsor');
     }
