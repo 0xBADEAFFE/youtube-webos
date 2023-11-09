@@ -49,20 +49,20 @@ uiContainer.addEventListener("keydown", (evt) => {
 }, true);
 
 uiContainer.innerHTML = `
-<h1>webOS YouTube Extended</h1>
-<label for="__notifications"><input type="checkbox" id="__notifications" /> Show notification messages</label>
-<label for="__adblock"><input type="checkbox" id="__adblock" /> Enable AdBlocking</label>
-<label for="__sponsorblock"><input type="checkbox" id="__sponsorblock" /> Enable SponsorBlock</label>
+<h1>webOS YouTube AdFree Settings</h1>
+<label for="__notifications"><label class="switch"><input type="checkbox" id="__notifications"><span class="slider round"></span></label> Show notification messages</label>
+<label for="__hide_logo"><label class="switch"><input type="checkbox" id="__hide_logo"><span class="slider round"></span></label> Hide YouTube logo (recommended on OLEDs)</label>
+<label for="__adblock"><label class="switch"><input type="checkbox" id="__adblock"><span class="slider round"></span></label> Enable AdBlocking</label>
+<label for="__sponsorblock"><label class="switch"><input type="checkbox" id="__sponsorblock"><span class="slider round"></span></label> Enable SponsorBlock</label>
 <blockquote>
-<label for="__sponsorblock_sponsor"><input type="checkbox" id="__sponsorblock_sponsor" /> Skip Sponsor Segments</label>
-<label for="__sponsorblock_intro"><input type="checkbox" id="__sponsorblock_intro" /> Skip Intro Segments</label>
-<label for="__sponsorblock_outro"><input type="checkbox" id="__sponsorblock_outro" /> Skip Outro Segments</label>
-<label for="__sponsorblock_interaction"><input type="checkbox" id="__sponsorblock_interaction" /> Skip Interaction Reminder Segments</label>
-<label for="__sponsorblock_selfpromo"><input type="checkbox" id="__sponsorblock_selfpromo" /> Skip Self Promotion Segments</label>
-<label for="__sponsorblock_music_offtopic"><input type="checkbox" id="__sponsorblock_music_offtopic" /> Skip Music and Off-topic Segments</label>
+<label for="__sponsorblock_sponsor"><label class="switch"><input type="checkbox" id="__sponsorblock_sponsor"><span class="slider round"></span></label> Skip Sponsor Segments</label>
+<label for="__sponsorblock_intro"><label class="switch"><input type="checkbox" id="__sponsorblock_intro"><span class="slider round"></span></label> Skip Intro Segments</label>
+<label for="__sponsorblock_outro"><label class="switch"><input type="checkbox" id="__sponsorblock_outro"><span class="slider round"></span></label> Skip Outro Segments</label>
+<label for="__sponsorblock_interaction"><label class="switch"><input type="checkbox" id="__sponsorblock_interaction"><span class="slider round"></span></label> Skip Interaction Reminder Segments</label>
+<label for="__sponsorblock_selfpromo"><label class="switch"><input type="checkbox" id="__sponsorblock_selfpromo"><span class="slider round"></span></label> Skip Self Promotion Segments</label>
+<label for="__sponsorblock_music_offtopic"><label class="switch"><input type="checkbox" id="__sponsorblock_music_offtopic"><span class="slider round"></span></label> Skip Music and Off-topic Segments</label>
 </blockquote>
 <div><small>Sponsor segments skipping - https://sponsor.ajay.app</small></div>
-<label for="__hide_logo"><input type="checkbox" id="__hide_logo" /> Hide YouTube logo (recommended on OLEDs)</label>
 `;
 
 document.querySelector('body').appendChild(uiContainer);
