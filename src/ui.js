@@ -189,3 +189,45 @@ setTimeout(() => {
 window.addEventListener("DOMNodeInserted", (evt) => {
   document.querySelector("ytlr-logo-entity").style.visibility = configRead('hideLogo') ? 'hidden' : 'visible';
 }, false);
+
+function applyUIFixes() {
+  try {
+    const tc = window.tectonicConfig;
+    tc.clientData.legacyApplicationQuality = 'full-animation';
+    tc.featureSwitches.enableAnimations = true;
+    tc.featureSwitches.enableListAnimations = true;
+    tc.featureSwitches.enableOnScrollLinearAnimation = true;
+    tc.featureSwitches.isLimitedMemory = false;
+  } catch (e) {
+    console.error('error setting tectonicConfig:', e);
+  }
+
+  try {
+    const bodyClasses = document.body.classList;
+
+    const observer = new MutationObserver(function bodyClassCallback(
+      _records,
+      _observer
+    ) {
+      try {
+        if (bodyClasses.contains('app-quality-root')) {
+          bodyClasses.remove('app-quality-root');
+        }
+      } catch (e) {
+        console.error('error in <body> class observer callback:', e);
+      }
+    });
+
+    observer.observe(document.body, {
+      subtree: false,
+      childList: false,
+      attributes: true,
+      attributeFilter: ['class'],
+      characterData: false
+    });
+  } catch (e) {
+    console.error('error setting up <body> class observer:', e);
+  }
+}
+
+applyUIFixes();
